@@ -3,7 +3,7 @@
 import os
 import shutil
 import tkinter as tk
-from tkinter import ttk, filedialog, Tk, HORIZONTAL
+from tkinter import TclError, ttk, filedialog, Tk, HORIZONTAL
 
 def find_dir():
     global description_label
@@ -80,6 +80,11 @@ def move_files(directory, file, path):
 
 # Creating the main window.
 root = Tk()
+# Replace the defauld icon
+try:
+    root.iconbitmap('organizer.ico')
+except:
+    pass
 # Setting up the geometry of the window.
 root.geometry('320x195')
 # By setting both of these parameters to false the user can not resize the window.
