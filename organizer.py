@@ -50,7 +50,7 @@ def organize(directory):
             case '.bmp'|'.cpt'|'.dds'|'.dib'|'.dng'|'.emf'|'.gif'|'.heic'|'.ico'|'.icon'|'.jpeg'|'.jpg'|'.pcx'|'.pic'|'.png'|'.psd'|'.psdx'|'.raw'|'.tga'|'.thm'|'.tif'|'.tiff'|'.wbmp'|'.wdp'|'.webp':
                 move_files(directory, file, '/Images/')
             case '.air'|'.app'|'.application'|'.appx'|'.bat'|'.bin'|'.com'|'.cpl'|'.deb'|'.dll'|'.elf'|'.exe'|'.jar'|'.js':
-                move_files*directory, file, '/Executable Files/'
+                move_files(directory, file, '/Executable Files/')
             case '.abr'|'.ai'|'.ani'|'.cdt'|'.djvu'|'.eps'|'.fla'|'.icns'|'.ico'|'.icon'|'.mdi'|'.odg'|'.pic'|'.psb'|'.psd'|'.pzl'|'.sup'|'.vsdx'|'.xmp':
                 move_files(directory, file, '/Graphic Files/')
             case '.3d'|'.3ds'|'.c4d'|'.dgn'|'.dwfx'|'.dwg'|'.dxf'|'.ipt'|'.lcf'|'.max'|'.obj'|'.pro'|'.skp'|'.stl'|'.u3d'|'.x_t':
