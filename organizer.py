@@ -1,10 +1,12 @@
 # Author: Nicolas Agudelo
 
+#Importing the libraries we are going to be using.
 import os
 import shutil
 import tkinter as tk
 from tkinter import TclError, ttk, filedialog, Tk, HORIZONTAL
 
+# The find dir function will ask the user for the folder he wants to organize. In case he presses 'Cancel' the dirname variable will be empty in this case we ask the user to please select a folder to be able to organize it
 def find_dir():
     global description_label
     frm = ttk.Frame(root, padding=10)
@@ -15,22 +17,29 @@ def find_dir():
     else:
         organize(dirname)
 
+# The organize function is the heart of the code here we will examine each file on the selected folder and classify it accordint to its extension.
+
 def organize(directory):
     
     os.chdir(directory)
     
     global description_label
     global progressbar
+    # We get the files from the folder selected by the user ignoring folders within that folder.
     files = [f for f in os.listdir('.') if os.path.isfile(f)]
+    # We use the step variable to increase the progress on our progress bar.
     step = 1
     total_files = len(files)
 
     for file in files:
         step += 1
+        # We separate the name of the files from its extension
         name, ext = os.path.splitext(file)
         ext = ext.lower()
+        # On each iteration we update our root window to increase the progress bar value.
         root.update_idletasks()
         progressbar['value'] = step * (100/total_files)
+        # Using match case to call the move_files function according to the type of file.
         match ext:
             case '.abw'|'.aww'|'.chm'|'.cnt'|'.dbx'|'.djvu'|'.doc'|'.docm'|'.docx'|'.dot'|'.dotm'|'.dotx'|'.epub'|'.gp4'|'.ind'|'.indd'|'.key'|'.keynote'|'.mht'|'.mpp'|'.odf'|'.ods'|'.odt'|'.opx'|'.ott'|'.oxps'|'.pages'|'.pdf'|'.pmd'|'.pot'|'.potx'|'.pps'|'.ppsx'|'.ppt'|'.pptm'|'.pptx'|'.prn'|'.ps'|'.pub'|'.pwi'|'.rtf'|'.sdd'|'.sdw'|'.shs'|'.snp'|'.sxw'|'.tpl'|'.vsd'|'.wpd'|'.wps'|'.wri'|'.xps':
                 move_files(directory, file, '/Documents/')
@@ -63,11 +72,14 @@ def organize(directory):
             case _:
                 move_files(directory, file, '/Others/')
         description_label.config(text = '{step}/{total_files} organized'.format(step = step, total_files = total_files))
+    # In case there are no files to be organized within the folder we inform the user.
     if total_files == 0:
         description_label['text'] = 'There are no files on this folder\n\nYou can now close the program\n\nOr\n\nOrganize other folder by clicking the Start button again.'
+    # If not we let him know once the folder has been organized.
     else:
         description_label.config(text = 'Folder organized!\n\nYou can now close the program\n\nOr\n\nOrganize other folder by clicking the Start button again.')
 
+# The move_files function will be on charge of moving the files to their respective folder. It will check if the folder already exists if it does it will just move the file if not it will create the folder first and move the file after that.
 def move_files(directory, file, path):
     try:
         shutil.move(file, directory + path + '{file}'.format(file = file))
@@ -78,9 +90,9 @@ def move_files(directory, file, path):
         pass
 
 
-# Creating the main window.
+# Creating the main window for the user interface.
 root = Tk()
-# Replace the defauld icon
+# Replace the default icon
 try:
     root.iconbitmap('organizer.ico')
 except:
@@ -103,7 +115,7 @@ startbutton = tk.Button(
     cursor='hand2',
     )
 
-# A description label to tell the user what the program does.
+# A description label to give information to the user about the program status.
 
 description_label = tk.Label(
     root,
@@ -119,10 +131,9 @@ progressbar = ttk.Progressbar(
     mode = 'determinate'
     )
 
+#Placing the objects we created for our user interface.
 description_label.place(x=4, y= 5)
 startbutton.place(x=140, y= 140)
 progressbar.pack(side='bottom', pady=5)
 
 root.mainloop()
-
-
