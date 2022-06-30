@@ -63,7 +63,10 @@ def organize(directory):
             case _:
                 move_files(directory, file, '/Others/')
         description_label.config(text = '{step}/{total_files} organized'.format(step = step, total_files = total_files))
-    description_label.config(text = 'Folder organized!\n\nYou can now close the program\n\nOr\n\nOrganize other folder by clicking the Start button again.')
+    if total_files == 0:
+        description_label['text'] = 'There are no files on this folder\n\nYou can now close the program\n\nOr\n\nOrganize other folder by clicking the Start button again.'
+    else:
+        description_label.config(text = 'Folder organized!\n\nYou can now close the program\n\nOr\n\nOrganize other folder by clicking the Start button again.')
 
 def move_files(directory, file, path):
     try:
