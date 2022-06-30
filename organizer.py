@@ -3,20 +3,34 @@
 import os
 import shutil
 import tkinter as tk
-from tkinter import ttk, filedialog, Tk
+from tkinter import ttk, filedialog, Tk, HORIZONTAL
 
 def find_dir():
+    global description_label
     frm = ttk.Frame(root, padding=10)
     ttk.Label(frm, text="Select the folder that you want to organize")
     dirname = filedialog.askdirectory(parent=root, initialdir='~', title='Select the folder that you want to organize')
-    organize(dirname)
+    if dirname == '':
+        description_label['text'] = 'Please select a folder to continue\n\nJust choose the folder that you want to organize\nby clicking the Start button below'
+    else:
+        organize(dirname)
 
 def organize(directory):
+    
     os.chdir(directory)
+    
+    global description_label
+    global progressbar
+    files = [f for f in os.listdir('.') if os.path.isfile(f)]
+    step = 1
+    total_files = len(files)
 
-    for file in os.listdir():
+    for file in files:
+        step += 1
         name, ext = os.path.splitext(file)
         ext = ext.lower()
+        root.update_idletasks()
+        progressbar['value'] = step * (100/total_files)
         match ext:
             case '.abw'|'.aww'|'.chm'|'.cnt'|'.dbx'|'.djvu'|'.doc'|'.docm'|'.docx'|'.dot'|'.dotm'|'.dotx'|'.epub'|'.gp4'|'.ind'|'.indd'|'.key'|'.keynote'|'.mht'|'.mpp'|'.odf'|'.ods'|'.odt'|'.opx'|'.ott'|'.oxps'|'.pages'|'.pdf'|'.pmd'|'.pot'|'.potx'|'.pps'|'.ppsx'|'.ppt'|'.pptm'|'.pptx'|'.prn'|'.ps'|'.pub'|'.pwi'|'.rtf'|'.sdd'|'.sdw'|'.shs'|'.snp'|'.sxw'|'.tpl'|'.vsd'|'.wpd'|'.wps'|'.wri'|'.xps':
                 move_files(directory, file, '/Documents/')
@@ -48,8 +62,8 @@ def organize(directory):
                 pass
             case _:
                 move_files(directory, file, '/Others/')
-            
-
+        description_label.config(text = '{step}/{total_files} organized'.format(step = step, total_files = total_files))
+    description_label.config(text = 'Folder organized!\n\nYou can now close the program\n\nOr\n\nOrganize other folder by clicking the Start button again.')
 
 def move_files(directory, file, path):
     try:
@@ -64,7 +78,7 @@ def move_files(directory, file, path):
 # Creating the main window.
 root = Tk()
 # Setting up the geometry of the window.
-root.geometry('300x150')
+root.geometry('320x195')
 # By setting both of these parameters to false the user can not resize the window.
 root.resizable(False, False)
 # We make sure the program gets the main focus on the user's Desktop.
@@ -89,8 +103,17 @@ description_label = tk.Label(
     justify= 'left',
     anchor = 'center'
     )
+
+progressbar = ttk.Progressbar(
+    root,
+    orient=HORIZONTAL,
+    length = 240,
+    mode = 'determinate'
+    )
+
 description_label.place(x=4, y= 5)
-startbutton.place(x=140, y= 100)
+startbutton.place(x=140, y= 140)
+progressbar.pack(side='bottom', pady=5)
 
 root.mainloop()
 
