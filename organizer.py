@@ -43,9 +43,11 @@ def organize(directory):
             case '.apk'|'.asec'|'.bbb'|'.crypt'|'.crypt14'|'.ipa'|'.ipd'|'.ipsw'|'.lqm'|'.mdbackup'|'.nbh'|'.nomedia'|'.npf'|'.pkpass'|'.rem'|'.rsc'|'.sbf'|'.sis'|'.sisx'|'.spd'|'.thm'|'.tpk'|'.vcf'|'.xap'|'.xapk':
                 move_files(directory, file, '/Mobile Phone Related Files/')
             case '.accdb'|'.accdt'|'.csv'|'.db'|'.dbf'|'.fdb'|'.gdb'|'.idx'|'.mdb'|'.mdf'|'.sdf'|'.sql'|'.sqlite'|'.wdb':
-                move_files*directory, file, '/Databases Files/'
+                move_files(directory, file, '/Databases Files/')
+            case '':
+                pass
             case _:
-                move_files*directory, file, '/Others/'
+                move_files(directory, file, '/Others/')
             
 
 
@@ -55,6 +57,8 @@ def move_files(directory, file, path):
     except FileNotFoundError:
         os.makedirs(directory + path)
         shutil.move(file, directory + path + '{file}'.format(file = file))
+    except PermissionError:
+        pass
 
 
 # Creating the main window.
