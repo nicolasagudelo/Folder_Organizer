@@ -41,7 +41,7 @@ def organize(directory):
         progressbar['value'] = step * (100/total_files)
         # Using match case to call the move_files function according to the type of file.
         match ext:
-            case '.abw'|'.aww'|'.chm'|'.cnt'|'.dbx'|'.djvu'|'.doc'|'.docm'|'.docx'|'.dot'|'.dotm'|'.dotx'|'.epub'|'.gp4'|'.ind'|'.indd'|'.key'|'.keynote'|'.mht'|'.mpp'|'.odf'|'.ods'|'.odt'|'.opx'|'.ott'|'.oxps'|'.pages'|'.pdf'|'.pmd'|'.pot'|'.potx'|'.pps'|'.ppsx'|'.ppt'|'.pptm'|'.pptx'|'.prn'|'.ps'|'.pub'|'.pwi'|'.rtf'|'.sdd'|'.sdw'|'.shs'|'.snp'|'.sxw'|'.tpl'|'.vsd'|'.wpd'|'.wps'|'.wri'|'.xps':
+            case '.abw'|'.aww'|'.chm'|'.cnt'|'.dbx'|'.djvu'|'.doc'|'.docm'|'.docx'|'.dot'|'.dotm'|'.dotx'|'.epub'|'.gp4'|'.ind'|'.indd'|'.key'|'.keynote'|'.mht'|'.mpp'|'.odf'|'.ods'|'.odt'|'.opx'|'.ott'|'.oxps'|'.pages'|'.pdf'|'.pmd'|'.pot'|'.potx'|'.pps'|'.ppsx'|'.ppt'|'.pptm'|'.pptx'|'.prn'|'.ps'|'.pub'|'.pwi'|'.rtf'|'.sdd'|'.sdw'|'.shs'|'.snp'|'.sxw'|'.tpl'|'.vsd'|'.wpd'|'.wps'|'.wri'|'.xps'|'.numbers'|'.ods'|'.sdc'|'.sxc'|'.xls'|'.xlsm'|'.xlsx':
                 move_files(directory, file, '/Documents/')
             case '.3ga'|'.aac'|'.aiff'|'.amr'|'.ape'|'.arf'|'.asf'|'.asx'|'.cda'|'.dvf'|'.flac'|'.gp4'|'.gp5'|'.gpx'|'.logic'|'.m4a'|'.m4b'|'.m4p'|'.midi'|'.mp3'|'.ogg'|'.opus'|'.pcm'|'.rec'|'.snd'|'.sng'|'.uax'|'.wav'|'.wma'|'.wpl'|'.zab':
                 move_files(directory, file, '/Audio Files/')
