@@ -57,7 +57,7 @@ def organize(directory):
                 move_files(directory, file, '/3D Graphics/')
             case '.eot'|'.otf'|'.ttc'|'.ttf'|'.woff':
                 move_files(directory, file, '/Font Files/')
-            case '.1st'|'.alx'|'.application'|'.asp'|'.csv'|'.htm'|'.html'|'.log'|'.lrc'|'.lst'|'.md'|'.nfo'|'.opml'|'.plist'|'.reg'|'.rtf'|'.srt'|'.sub'|'.tbl'|'.text'|'.txt'|'.xml'|'.xmp'|'.xsd'|'.xsl'|'.xslt':
+            case '.1st'|'.alx'|'.application'|'.asp'|'.csv'|'.htm'|'.html'|'.log'|'.lrc'|'.lst'|'.md'|'.nfo'|'.opml'|'.plist'|'.reg'|'.rtf'|'.srt'|'.sub'|'.tbl'|'.text'|'.txt'|'.xml'|'.xmp'|'.xsd'|'.xsl'|'.xslt'|'.ini':
                 move_files(directory, file, '/Text Files/')
             case '.001'|'.002'|'.003'|'.004'|'.005'|'.006'|'.007'|'.008'|'.009'|'.010'|'.7z'|'.7z.001'|'.7z.002'|'.7z.003'|'.7z.004'|'.7zip'|'.a00'|'.a01'|'.a02'|'.a03'|'.a04'|'.a05'|'.ace'|'.air'|'.appxbundle'|'.arc'|'.arj'|'.bar'|'.bin'|'.c00'|'.c01'|'.c02'|'.c03'|'.cab'|'.cbr'|'.cbz'|'.cso'|'.deb'|'.dlc'|'.gz'|'.gzip'|'.hqx'|'.inv'|'.isz'|'.jar'|'.msu'|'.nbh'|'.pak'|'.part1.exe'|'.part1.rar'|'.part2.rar'|'.pkg'|'.pkg'|'.r00'|'.r01'|'.r02'|'.r03'|'.r04'|'.r05'|'.r06'|'.r07'|'.r08'|'.r09'|'.r10'|'.rar'|'.rpm'|'.sit'|'.sitd'|'.sitx'|'.tar'|'.tar.gz'|'.tgz'|'.uax'|'.vsix'|'.webarchive'|'.z01'|'.z02'|'.z03'|'.z04'|'.z05'|'.zab'|'.zip'|'.zipx':
                 move_files(directory, file, '/Compressed Files/')
@@ -120,9 +120,10 @@ startbutton = tk.Button(
 description_label = tk.Label(
     root,
     text = 'You can use this program to organize all your different \ntype of files in folders\n\nJust choose the folder that you want to organize\nby clicking the Start button below',
-    justify= 'left',
-    anchor = 'center'
+    justify= 'left'    
     )
+
+# A progress bar for the user to follow the progress of the program.
 
 progressbar = ttk.Progressbar(
     root,
